@@ -4,6 +4,7 @@ function entrar(e) {
     var xhr = Ti.Network.createHTTPClient({
     	onload: function(e){
     		json = JSON.parse(this.responseText);
+    		Ti.App.Properties.setString('token', json.token);
     		alert(json.token);
     	},
     	onerror: function(e){
