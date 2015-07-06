@@ -1,0 +1,36 @@
+
+
+<Alloy>
+	<TabGroup>
+		<Tab title="Trivias">
+			<Window title="Tab 1">
+				<Label>Aqui se crean y muestran las trivias en off y online</Label>
+			</Window>
+		</Tab>
+		<Tab title="Play">
+			<Window title="Tab 2"> 
+				<Label>Aqui se juega en offline y online</Label>
+			</Window>
+		</Tab>
+
+		<Tab title="Trofeos" onClick="loadUsers">
+			<Window title="Tab 2" id="wintrophy">
+			<TableView id="mainList">
+				<TableViewRow id="listRow">
+				<View id="rowContainer">
+			<!--
+						<ImageView id="profilePic"></ImageView>
+						<Label id="profileName"></Label>
+						<Label id="scoreUser">250</Label>
+						<Label id="posicion">1</Label>
+						<View id="grayLine" bottom="51"></View>
+!-->
+				</View>
+			</TableViewRow>
+		</TableView>
+
+			</Window>
+		</Tab>
+	</TabGroup>
+</Alloy>
+

@@ -5,7 +5,9 @@ function entrar(e) {
     	onload: function(e){
     		json = JSON.parse(this.responseText);
     		Ti.App.Properties.setString('token', json.token);
-    		alert(json.token);
+    		//alert(json.token);
+    		var w=Alloy.createController('main').getView(); 
+			w.open();
     	},
     	onerror: function(e){
     		alert('error');
@@ -35,4 +37,4 @@ function password_blur(e) {
     $.password.setBorderColor("#aaa");
 }
 
-$.login.open();
+$.index.open();
