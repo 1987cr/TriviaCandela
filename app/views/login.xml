@@ -1,0 +1,13 @@
+<Alloy>
+	<Window class="container">
+		<View id="view_logo">
+			<ImageView id="img_logo"/>
+		</View>
+		
+		<View id="view_login">
+			<TextField onFocus="username_focus" onBlur="username_blur" id="username"></TextField>
+			<TextField onFocus="password_focus" onBlur="password_blur" id="password"></TextField>
+			<Button onClick="entrar" id="btn_entrar">Entrar</Button>
+		</View>
+	</Window>
+</Alloy>
