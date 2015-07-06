@@ -1,18 +1,21 @@
 function entrar(e) {
-    var url = "http://sheltered-mesa-1621.herokuapp.com/api/scores";
+    var url = "http://sheltered-mesa-1621.herokuapp.com/api/sessions";
     var json;
     var xhr = Ti.Network.createHTTPClient({
     	onload: function(e){
     		json = JSON.parse(this.responseText);
-    		alert(json[0].score);
+    		alert(json.token);
     	},
     	onerror: function(e){
     		alert('error');
     	},
     	timeout:5000
     });
-    xhr.open('GET',url);
-    xhr.send();
+    xhr.open('POST',url);
+    xhr.send({
+    	email: $.username.getValue(),
+    	password: $.password.getValue()
+    });
 }
 
 function username_focus(e) {
