@@ -1,0 +1,70 @@
+".container": {
+	backgroundColor:"white"
+}
+
+
+"#view_logo": {
+	width: "100%",
+	top: "10%",
+	height: "45%",
+	backgroundColor: "#fff",
+	layout: 'vertical'
+}
+
+"#img_logo": {
+	width: "80%",
+	height: "80%",
+	image: "/logo.png"
+}
+
+"#view_login": {
+	width: "100%",
+	top: "50%",
+	height: "45%",
+	backgroundColor: "#fff",
+	layout: 'vertical'
+}
+
+"#username": {
+	width: "75%",
+	height: "20%",
+	backgroundColor: "#fff",
+	color: "#555",
+	keyboardType: Ti.UI.KEYBOARD_DEFAULT,
+	borderRadius: "20px",
+	borderWidth: "2px",
+	borderStyle: Titanium.UI.INPUT_BORDERSTYLE_ROUNDED,
+	borderColor: "#aaa",
+	paddingLeft: 20,
+	paddingRight: 20,
+	hintText: "Email",
+	hintTextColor: "#aaa"
+}
+
+"#password": {
+	width: "75%",
+	top: "4%",
+	height: "20%",
+	backgroundColor: "#fff",
+	color: "#555",
+	keyboardType: Ti.UI.KEYBOARD_DEFAULT,
+	borderRadius: "20px",
+	borderWidth: "2px",
+	borderStyle: Titanium.UI.INPUT_BORDERSTYLE_ROUNDED,
+	borderColor: "#aaa",	
+	hintText: "Contraseña",
+	hintTextColor: "#aaa",
+	passwordMask: "true"
+}
+
+"#btn_entrar": {
+	width: "75%",
+	top: "4%",
+	height: "20%",
+	backgroundColor: "#ffae00",
+	color: "#fff",
+	borderRadius: "20px",
+	borderWidth: "2px",
+	borderStyle: Titanium.UI.INPUT_BORDERSTYLE_ROUNDED,
+	borderColor: "#ffae00"
+}
