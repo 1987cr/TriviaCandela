@@ -35,4 +35,4 @@ function password_blur(e) {
     $.password.setBorderColor("#aaa");
 }
 
-$.index.open();
+$.login.open();
