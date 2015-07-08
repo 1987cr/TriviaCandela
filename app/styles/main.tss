@@ -1,11 +1,43 @@
-
-
 "Window": {
-	backgroundColor:"fff"
+	backgroundColor:"#fff"
 }
 
+"Label":{
+	color: "#000"
+}
+
+"#tab1": {
+	icon: "/home.png"
+}
+
+"#tab2": {
+	icon: "/pcandela.png"
+}
+
+"#tab3": {
+	icon: "/podio.png"
+}
+
+"#tab4": {
+	icon: "/logout.png"
+}
+
+"TabGroup":{
+	backgroundColor: "#fff",
+	tabsBackgroundColor: "#ff6000",
+	tabsBackgroundFocusedColor: "#ff6000",
+	activeTabBackgroundColor: "#ff6000",
+	barColor: "#ffae00"
+}
+
+
+"#mainList":{
+	separatorStyle:"NONE"
+}
+
+/*
 "#rowContainer":{
-	borderColor:"#cacdd8",
+	borderColor:"#ffae00",
 	borderRadius:5,
 	borderWidth:1,
 	left:"5",
@@ -17,17 +49,12 @@
 	backgroundColor: "#fff"
 }
 
-"#mainList":{
-	
-	separatorStyle:"NONE"
-}
-
 "#listRow":{
 	
 	heigth:"200",
 	selectionStyle:"NONE"
 }
-/*
+
 "#posicion":{
 	color:"black",
 	right:20
@@ -64,11 +91,9 @@
 	font:{
 	fontSize:"16"
 	}
-}*/
-
-
-
-"TabGroup":{
-	backgroundColor: "#000"	
 }
+
+*/
+
+
 

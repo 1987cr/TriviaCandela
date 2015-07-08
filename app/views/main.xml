@@ -1,36 +1,42 @@
-
-
 <Alloy>
-	<TabGroup>
-		<Tab title="Trivias">
+	<TabGroup id="tabGroup">
+		
+		<Tab id="tab1">
 			<Window title="Tab 1">
-				<Label>Aqui se crean y muestran las trivias en off y online</Label>
+				
 			</Window>
 		</Tab>
-		<Tab title="Play">
+		
+		<Tab id="tab2">
 			<Window title="Tab 2"> 
-				<Label>Aqui se juega en offline y online</Label>
-			</Window>
-		</Tab>
-
-		<Tab title="Trofeos" onClick="loadUsers">
-			<Window title="Tab 2" id="wintrophy">
-			<TableView id="mainList">
-				<TableViewRow id="listRow">
-				<View id="rowContainer">
-			<!--
-						<ImageView id="profilePic"></ImageView>
-						<Label id="profileName"></Label>
-						<Label id="scoreUser">250</Label>
-						<Label id="posicion">1</Label>
-						<View id="grayLine" bottom="51"></View>
-!-->
+				<View>
+					<Button onClick="setIcon">Sincronizar</Button>	
 				</View>
-			</TableViewRow>
-		</TableView>
-
+				
 			</Window>
 		</Tab>
+				
+		
+		<Tab id="tab3" onClick="loadUsers">
+			<Window title="Tab 2" id="wintrophy">
+				<TableView id="mainList">
+
+				</TableView>
+			</Window>
+		</Tab>
+		
+		<Tab  onClick="logout" id="tab4">
+			<Window>
+				<AlertDialog onClick="optionDialog" id="logoutDialog" title="Cerrar Sesión" message="¿Está seguro que desea cerrar sesión?">
+					<ButtonNames>
+						<ButtonName>Aceptar</ButtonName>
+						<ButtonName>Cancelar</ButtonName>
+					</ButtonNames>
+				</AlertDialog>
+			</Window>
+		</Tab>
+		
 	</TabGroup>
+	
 </Alloy>
 

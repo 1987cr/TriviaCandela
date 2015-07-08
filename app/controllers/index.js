@@ -1,11 +1,11 @@
 function entrar(e) {
+	
     var url = "http://sheltered-mesa-1621.herokuapp.com/api/sessions";
     var json;
     var xhr = Ti.Network.createHTTPClient({
     	onload: function(e){
     		json = JSON.parse(this.responseText);
     		Ti.App.Properties.setString('token', json.token);
-    		//alert(json.token);
     		var w=Alloy.createController('main').getView(); 
 			w.open();
     	},
@@ -19,6 +19,8 @@ function entrar(e) {
     	email: $.username.getValue(),
     	password: $.password.getValue()
     });
+    //var w=Alloy.createController('main').getView(); 
+	//w.open();
 }
 
 function username_focus(e) {
@@ -37,4 +39,11 @@ function password_blur(e) {
     $.password.setBorderColor("#aaa");
 }
 
-$.index.open();
+if(Ti.App.Properties.getString("token") != "null"){
+	var w=Alloy.createController('main').getView(); 
+	w.open();
+}else{
+	$.index.open();
+}
+
+
