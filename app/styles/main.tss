@@ -6,6 +6,18 @@
 	color: "#000"
 }
 
+"Button":{
+	width: "75%",
+	top: "14%",
+	height: "20%",
+	backgroundColor: "#ffae00",
+	color: "#fff",
+	borderRadius: "20px",
+	borderWidth: "2px",
+	borderStyle: Titanium.UI.INPUT_BORDERSTYLE_ROUNDED,
+	borderColor: "#ffae00"
+}
+
 "#tab1": {
 	icon: "/home.png"
 }
@@ -30,10 +42,33 @@
 	barColor: "#ffae00"
 }
 
+"#view_splash":{
+	width: "100%",
+	height: "45%",
+	top: "0%",
+	backgroundImage: "/home-splash.png"
+}
+
+"#view_play":{
+	width: "100%",
+	height: "55%",
+	top: "45%"
+}
+
+"#podio_splash":{
+	height: "25%",
+	top: "0%",
+	width: "100%",
+	backgroundImage: "/podio-splash.png"
+}
 
 "#mainList":{
-	separatorStyle:"NONE"
+	separatorStyle:"NONE",
+	top: "25%",
+	backgroundColor: "#fff"
 }
+
+
 
 /*
 "#rowContainer":{

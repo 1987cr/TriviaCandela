@@ -1,81 +1,180 @@
-function setIcon(e){
-	$.tab2.setIcon("/home2.png");
+function playTrivia(e){
+	var w=Alloy.createController('playTrivia').getView(); 
+	w.open();
 }
 
-function loadUsers(e){
+function sortByKey(array, key){
+	return array.sort(function(a, b){
+		var x = a[key];
+		var y = b[key];
+		return ((x > y) ? -1 : ((x < y) ? 1 : 0));
+	});
+}
 
-	var url = "http://sheltered-mesa-1621.herokuapp.com/api/scores";
-	var json;
-	var tableData=[];
-	var max=-1;
+function loadUsers(e) {
 
-	var xhr = Ti.Network.createHTTPClient({
-	    onload: function(e) {
+    var url1 = "http://sheltered-mesa-1621.herokuapp.com/api/users/me/scores";
+    var url2 = "http://sheltered-mesa-1621.herokuapp.com/api/scores";
+    var json, json2;
+    var tableData = [];
+	
+	var personal = Ti.Network.createHTTPClient({
+        onload: function(e) {
+        	
+            json2 = JSON.parse(this.responseText);
+			json2 = sortByKey(json2, 'score');
+			
+            var row = Ti.UI.createTableViewRow({
+                
+            });
+                
+			var view = Ti.UI.createView({
+            	borderColor: "#ff6000",
+                height: "100",
+                borderRadius: 5,
+                borderWidth: 1,
+                left: "5",
+                right: "5",
+                top: "10",
+                bottom: "5",
+                height: Ti.UI.SIZE,
+                width: Ti.UI.FILL,
+                backgroundColor: "#ff6000"
+            });
+
+       		var label1 = Ti.UI.createLabel({
+                left: "25",
+                color: "#fff",
+                text: "-",
+                height: "45",
+                font: {
+                	fontWeight: "bold"
+                }
+            });
+            
+            var label2 = Ti.UI.createLabel({
+                left: "80",
+                color: "#fff",
+                text: "Record personal",
+                height: "45",
+                font: {
+                	fontWeight: "bold"
+                }
+            });
+                
+            var label3 = Ti.UI.createLabel({
+                right: "30",
+                color: "#fff",
+                text: json2[0].score,
+                height: "45",
+                font: {
+                	fontSize: 20,
+                	fontWeight: "bold"
+                }
+            });
+			
+			view.add(label1);
+            view.add(label2);
+			view.add(label3);
+			
+            row.add(view);
+
+            tableData.push(row);
+            
+			$.mainList.setData(tableData);
+				
+        },
+        onerror: function(e) {
+            alert('error');
+        },
+        timeout: 8000
+   }); 
+
+    personal.open("GET", url1);
+    personal.setRequestHeader('Content-Type','application/x-www-form-urlencoded');
+    personal.setRequestHeader('Token', Ti.App.Properties.getString("token"));
+    personal.send(); 
+	
+    var xhr = Ti.Network.createHTTPClient({
+        onload: function(e) {
+        	
             json = JSON.parse(this.responseText);
+			json = sortByKey(json, 'score');
+			
+            for (var i = 0; i < 7; i++) {
 
-            for(var i=0; i<=10;i++){
+                var row = Ti.UI.createTableViewRow({
+                    
+                });
+				
+				var view = Ti.UI.createView({
+                    borderColor: "#ffc64c",
+                    height: "100",
+                    borderRadius: 5,
+                    borderWidth: 1,
+                    left: "5",
+                    right: "5",
+                    top: "5",
+                    bottom: "5",
+                    height: Ti.UI.SIZE,
+                    width: Ti.UI.FILL,
+                    backgroundColor: "#ffc64c"
+                });
+				
+                var label1 = Ti.UI.createLabel({
+                    left: "25",
+                    color: "#fff",
+                    text: i + 1,
+                    height: "45",
+                    font: {
+                    	fontSize: 30
+                    }
+                });
+                
+                var label2 = Ti.UI.createLabel({
+                    left: "80",
+                    color: "#fff",
+                    text: json[i].user.email,
+                    height: "45",
+                    font: {
+                    	fontWeight: "bold"
+                    }
+                });
+                
+                var label3 = Ti.UI.createLabel({
+                    right: "30",
+                    color: "#fff",
+                    text: json[i].score,
+                    height: "45",
+                    font: {
+                    	fontSize: 20,
+                    	fontWeight: "bold"
+                    }
+                });
+                //view.add(image);
+                view.add(label1);
+                view.add(label2);
+				view.add(label3);
+				
+                row.add(view);
 
-            	 var row = Ti.UI.createTableViewRow({heigth:"200"});
-
-            	var view =Ti.UI.createView({	borderColor:"#cacdd8",
-	borderRadius:5,
-	borderWidth:1,
-	left:"5",
-	right:"5",
-	top:"5",
-	bottom:"5",
-	height:Ti.UI.SIZE,
-	width:Ti.UI.FILL,
-	backgroundColor: "#E33B3B" });
-
-
-            	if(i==0){
-            	var image =Ti.UI.createImageView({backgroundColor:"black",	width:"66",
-	heigth:"66",
-	image:"trophy2.png",
-	top:"5",
-	left:"5"});
-	        	           	
-	        	}   
-	        	else{
-					 var image =Ti.UI.createImageView({width:"66",
-					heigth:"66",
-					image:"trophy2.png",
-					top:"5",
-					left:"5"});
-	        	}
-	        	var label = Ti.UI.createLabel({ top:"5",left:"80",color:"#ffae00",text : json[i].user.email});
-				var label2 = Ti.UI.createLabel({ top:"25",	left:"80",	color:"#ff6000", text : json[i].score});
-				view.add(image); 
-				view.add(label);  
-				view.add(label2);    
-
-
-				row.add(view);
-
-				tableData.push(row);
-				if(json[i].score>max){
-					max=json[i].score;
-				}
+                tableData.push(row);
 
             }
+            
             $.mainList.setData(tableData);
-	        
-	    },
-	    onerror: function(e) {
-		
-	        alert('error');
-	    },
-	    timeout:5000
-	});
-	xhr.open("GET", url);
-	xhr.send();  // request is actually sent with this statement
+
+        },
+        onerror: function(e) {
+            alert('error');
+        },
+        timeout: 8000
+    });
+    xhr.open("GET", url2);
+    xhr.send(); 
 }
 
 function logout(e){
-	/*Ti.App.Properties.setString('token', "null");
-	var w=Alloy.createController('index').getView();  
-	w.open();*/
 	$.logoutDialog.show();
 }
 

@@ -3,14 +3,22 @@
 		
 		<Tab id="tab1">
 			<Window title="Tab 1">
+				<View id="view_splash">
+					<ImageView id="img_splash">
+						
+					</ImageView>
+				</View>
+				<View id="view_play">
+					<Button onClick="playTrivia">Nuevo Juego</Button>
+				</View>
 				
 			</Window>
 		</Tab>
-		
+		 
 		<Tab id="tab2">
 			<Window title="Tab 2"> 
 				<View>
-					<Button onClick="setIcon">Sincronizar</Button>	
+					<Button >Sincronizar</Button>	
 				</View>
 				
 			</Window>
@@ -19,6 +27,9 @@
 		
 		<Tab id="tab3" onClick="loadUsers">
 			<Window title="Tab 2" id="wintrophy">
+				<View  id="podio_splash">
+					
+				</View>
 				<TableView id="mainList">
 
 				</TableView>

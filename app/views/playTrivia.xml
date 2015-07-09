@@ -1,0 +1,23 @@
+
+<Alloy>
+	<Window class="container">
+		
+		<View id="question">
+			<Button id="giveUp" onClick="giveUp"></Button>
+			<AlertDialog onClick="rendirseDialog" id="rendirseDialog" title="Rendirse" message="¿Está seguro que desea rendirse?">
+				<ButtonNames>
+					<ButtonName>Aceptar</ButtonName>
+					<ButtonName>Cancelar</ButtonName>
+				</ButtonNames>
+			</AlertDialog>
+		</View>
+
+		<View id="answers">			
+		</View>
+		
+		<View id="continuar">
+		</View>
+		
+	</Window>
+</Alloy>
+

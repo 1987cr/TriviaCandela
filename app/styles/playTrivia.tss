@@ -1,0 +1,35 @@
+
+"#question":{
+	width: "100%",
+	top: "0%",
+	height: "40%",
+	backgroundImage: "/trivia-splash.png"
+}
+
+"#giveUp": {
+	top: 0,
+	left:0,
+	width: "50",
+	height: "50",
+	backgroundColor: "transparent",
+	backgroundImage: "/giveUp.png"
+}
+
+"#answers":{
+	width: "100%",
+	top: "40%",
+	height: "60%",
+	color:"#ffae00",
+	backgroundColor: "white",
+	layout: 'vertical'
+}
+
+
+"#continuar":{
+	width:"100%",
+	top:"90%",
+	height: "10%",
+	backgroundColor:"#ff6000",
+	layout:'vertical'
+}
+
