@@ -56,7 +56,7 @@
 }
 
 "#podio_splash":{
-	height: "25%",
+	height: "25%", 
 	top: "0%",
 	width: "100%",
 	backgroundImage: "/podio-splash.png"

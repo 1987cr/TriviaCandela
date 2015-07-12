@@ -1,6 +1,7 @@
 <Alloy>
 	<TabGroup id="tabGroup">
 		
+		<!-- Home Tab -->
 		<Tab id="tab1">
 			<Window title="Tab 1">
 				<View id="view_splash">
@@ -9,12 +10,14 @@
 					</ImageView>
 				</View>
 				<View id="view_play">
-					<Button onClick="playTrivia">Nuevo Juego</Button>
+					<Button onClick="playTrivia">Nuevo Juego</Button> 
 				</View>
 				
 			</Window>
 		</Tab>
 		 
+		 
+		<!-- Ponte Candela Tab -->
 		<Tab id="tab2">
 			<Window title="Tab 2"> 
 				<View>
@@ -24,7 +27,7 @@
 			</Window>
 		</Tab>
 				
-		
+		<!-- Podio Tab -->
 		<Tab id="tab3" onClick="loadUsers">
 			<Window title="Tab 2" id="wintrophy">
 				<View  id="podio_splash">
@@ -36,6 +39,7 @@
 			</Window>
 		</Tab>
 		
+		<!-- Logout Tab -->
 		<Tab  onClick="logout" id="tab4">
 			<Window>
 				<AlertDialog onClick="optionDialog" id="logoutDialog" title="Cerrar Sesión" message="¿Está seguro que desea cerrar sesión?">

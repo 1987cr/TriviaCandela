@@ -202,8 +202,6 @@ function loadQuestions(e) {
                                         res3.setBackgroundColor('green');
                                     }
                                     sumarScoreUser();
-
-
                                     mostrarBotonContinue();
 
                                 }
@@ -305,31 +303,7 @@ function loadQuestions(e) {
 
                             };
 
-                            function sumarScoreUser(e) {
-
-                                var url = "http://sheltered-mesa-1621.herokuapp.com/api/users/me/scores";
-                                var tokeni = Ti.App.Properties.getString('token');
-                                var score = Ti.Network.createHTTPClient({
-                                    onload: function(e) {
-                                        var dialog = Ti.UI.createAlertDialog({
-                                        	title: 'Score',
-                                        	message: puntaje
-                                        });
-                                        dialog.show();
-                                    },
-                                    onerror: function(e) {
-                                        alert(e);
-                                    },
-                                    timeout: 5000
-                                });
-                                score.open('POST', url);
-                                score.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
-                                score.setRequestHeader('token', Ti.App.Properties.getString("token"));
-                                score.send({
-                                    score: puntaje
-                                });
-
-                            };
+                            
                         } else {
                             $.question.remove(label);
                             loadQuestions();
@@ -367,4 +341,28 @@ function rendirseDialog(e){
 		var w=Alloy.createController('main').getView();  
 		w.open();
 	}
+}
+
+function sumarScoreUser(e) {
+
+    var url = "http://sheltered-mesa-1621.herokuapp.com/api/users/me/scores";
+    var score = Ti.Network.createHTTPClient({
+        onload: function(e) {
+            var dialog = Ti.UI.createAlertDialog({
+            	title: 'Score',
+            	message: puntaje
+            });
+            dialog.show();
+        },
+        onerror: function(e) {
+            alert(e);
+        },
+        timeout: 5000
+    });
+    score.open('POST', url);
+    score.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+    score.setRequestHeader('token', Ti.App.Properties.getString("token"));
+    score.send({
+        score: puntaje
+    });
 }

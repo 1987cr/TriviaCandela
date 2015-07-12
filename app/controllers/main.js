@@ -180,8 +180,8 @@ function logout(e){
 
 function optionDialog(e){
 	if(e.index == 0){
-		Ti.App.Properties.setString('token', "null");
+		Ti.App.Properties.setString('token', null);
 		var w=Alloy.createController('index').getView();  
 		w.open();
-	}
+	} 
 }
