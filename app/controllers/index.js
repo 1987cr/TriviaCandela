@@ -39,7 +39,8 @@ function password_blur(e) {
     $.password.setBorderColor("#aaa");
 }
 
-if(Ti.App.Properties.getString("token") != null){
+if(Ti.App.Properties.getString("token") != null ||
+	Ti.Network.networkTypeName == "NONE"){
 	var w=Alloy.createController('main').getView(); 
 	w.open();
 }else{

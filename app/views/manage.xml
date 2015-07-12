@@ -1,0 +1,12 @@
+<Alloy>
+	<Window id="win" class="container">
+		<View id="topBar">
+			<Button onClick="closeMe" id="backBtn"></Button>	
+			<Button onClick="newTrivia" id="newBtn"></Button>
+		</View>
+		
+		<TableView id="triviaList" onClick="showEdit"> 
+
+		</TableView>
+	</Window>
+</Alloy>

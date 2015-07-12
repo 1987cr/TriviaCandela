@@ -3,7 +3,7 @@
 }
 
 
-"#view_logo": {
+"#view_logo": { 
 	width: "100%",
 	top: "10%",
 	height: "45%",
@@ -67,4 +67,4 @@
 	borderWidth: "2px",
 	borderStyle: Titanium.UI.INPUT_BORDERSTYLE_ROUNDED,
 	borderColor: "#ffae00"
-}
+} 

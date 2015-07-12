@@ -1,3 +1,4 @@
+
 function playTrivia(e){
 	var w=Alloy.createController('playTrivia').getView(); 
 	w.open();
@@ -184,4 +185,9 @@ function optionDialog(e){
 		var w=Alloy.createController('index').getView();  
 		w.open();
 	} 
+}
+
+function manage(e){
+	var w=Alloy.createController('manage').getView();  
+	w.open(); 
 }

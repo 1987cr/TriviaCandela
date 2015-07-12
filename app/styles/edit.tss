@@ -1,0 +1,58 @@
+".container": {
+	backgroundColor: "white"
+}
+
+"#fieldsView": {
+	width: "100%",
+	top: "0",
+	height: "90%",
+	backgroundColor: "#fff",
+	layout: 'vertical'
+}
+
+"#buttonView": {
+	width: "100%",
+	top: "90%",
+	height: "10%",
+	backgroundColor: "#fff",
+	layout: 'horizontal'
+}
+
+".answer": {
+	width: "75%", 
+	top: "5%",
+	height: "10%",
+	backgroundColor: "#fff",
+	color: "#555",
+	keyboardType: Ti.UI.KEYBOARD_DEFAULT,
+	borderRadius: "20px",
+	borderWidth: "2px",
+	borderStyle: Titanium.UI.INPUT_BORDERSTYLE_ROUNDED,
+	borderColor: "#aaa",
+	paddingLeft: 20,
+	paddingRight: 20,
+	hintTextColor: "#aaa"
+}
+
+"#question": {
+	width: "75%", 
+	top: "5%",
+	height: "20%",
+	backgroundColor: "#fff",
+	color: "#555",
+	keyboardType: Ti.UI.KEYBOARD_DEFAULT,
+	borderRadius: "20px",
+	borderWidth: "2px",
+	borderStyle: Titanium.UI.INPUT_BORDERSTYLE_ROUNDED,
+	borderColor: "#aaa",
+	paddingLeft: 20,
+	paddingRight: 20,
+	hintTextColor: "#aaa",
+	font: {
+		fontSize: 15
+	}
+}
+
+"Button": {
+	width: "33.33%"
+}

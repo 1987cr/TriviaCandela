@@ -1,0 +1,33 @@
+".container": {
+	backgroundColor: "white"
+}
+
+"#topBar":{
+	backgroundColor: "#333",
+	height: "10%",
+	top: "0%",
+	width: "100%"
+}
+
+"#triviaList": {
+	top: "10%",
+	height: "90%"
+}
+
+"#newBtn":{
+	top: 0,
+	right:0,
+	width: "50",
+	height: "50",
+	backgroundColor: "transparent",
+	backgroundImage: "/new.png"
+}
+
+"#backBtn":{
+	top: 0,
+	left:0,
+	width: "50",
+	height: "50",
+	backgroundColor: "transparent",
+	backgroundImage: "/back.png"
+}
