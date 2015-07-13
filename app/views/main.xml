@@ -19,7 +19,7 @@
 		 
 		<!-- Ponte Candela Tab -->
 		<Tab id="tab2">
-			<Window title="Tab 2"> 
+			<Window title="Tab 2" onClose="cleanup"> 
 				<View layout="vertical">
 					<Button onClick="sincronizar">Sincronizar</Button>
 					
