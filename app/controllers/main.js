@@ -191,3 +191,14 @@ function manage(e){
 	var w=Alloy.createController('manage').getView();  
 	w.open(); 
 }
+
+function sincronizar(e){
+	Ti.Media.openPhotoGallery({
+		success: function(event){
+			if(event.mediaType == Ti.Media.MEDIA_TYPE_PHOTO){
+				var image = event.media;
+				alert(image.nativePath);
+			}
+		}
+	});
+}

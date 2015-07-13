@@ -21,9 +21,9 @@
 		<Tab id="tab2">
 			<Window title="Tab 2"> 
 				<View layout="vertical">
-					<Button>Sincronizar</Button>	
+					<Button onClick="sincronizar">Sincronizar</Button>
 					
-					<Button onClick="manage">Administrar</Button> 
+					<Button onClick="manage">Administrar Trivias</Button> 
 				</View>
 				
 			</Window>

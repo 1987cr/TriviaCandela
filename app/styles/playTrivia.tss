@@ -18,10 +18,9 @@
 "#answers":{
 	width: "100%",
 	top: "40%",
-	height: "60%",
+	height: "50%",
 	color:"#ffae00",
-	backgroundColor: "white",
-	layout: 'vertical'
+	backgroundColor: "#ffefae"
 }
 
 
