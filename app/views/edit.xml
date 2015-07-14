@@ -7,22 +7,22 @@
 			
 			<View class="answField" id="fld1">
 				<TextField hintText="respuesta 1" class="answer" id="answ1"></TextField>
-				<Button class="fileBtn" id="btn1">Archivo</Button>
+				<Button class="fileBtn" id="btn1" onClick="load1">Archivo</Button>
 			</View>
 			 
 			<View class="answField" id="fld2">
 				<TextField hintText="respuesta 2" class="answer" id="answ2"></TextField>
-				<Button class="fileBtn" id="btn2">Archivo</Button>
+				<Button class="fileBtn" id="btn2" onClick="load2">Archivo</Button>
 			</View>
 			
 			<View class="answField" id="fld3">
 				<TextField hintText="respuesta 3" class="answer" id="answ3"></TextField>
-				<Button class="fileBtn" id="btn3">Archivo</Button> 
+				<Button class="fileBtn" id="btn3" onClick="load3">Archivo</Button> 
 			</View>
 			
 			<View class="answField" id="fld4">
 				<TextField hintText="respuesta 4" class="answer" id="answ4"></TextField>
-				<Button class="fileBtn" id="btn4">Archivo</Button>
+				<Button class="fileBtn" id="btn4" onClick="load4">Archivo</Button>
 			</View>
 			
 		</View>

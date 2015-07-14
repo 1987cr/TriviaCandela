@@ -1,4 +1,18 @@
+if (Ti.Platform.name === 'iPhone OS'){
+  style = Ti.UI.iPhone.ActivityIndicatorStyle.DARK;
+}
+else {
+  style = Ti.UI.ActivityIndicatorStyle.DARK;
+}
+var activityIndicator = Ti.UI.createActivityIndicator({
+  style:style,
+  height:Ti.UI.SIZE,
+  width:Ti.UI.SIZE
+});
+$.win.add(activityIndicator);
+
 (function() {
+	activityIndicator.show();
     loadTrivias();
 })();
 
@@ -60,7 +74,7 @@ function loadTrivias(e){
 	
 	            tableData.push(row);
 			}
-			          
+			activityIndicator.hide();          
 			$.triviaList.data = tableData;
 				
         },

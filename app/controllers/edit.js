@@ -1,3 +1,16 @@
+if (Ti.Platform.name === 'iPhone OS'){
+  style = Ti.UI.iPhone.ActivityIndicatorStyle.DARK;
+}
+else {
+  style = Ti.UI.ActivityIndicatorStyle.DARK;
+}
+var activityIndicator = Ti.UI.createActivityIndicator({
+  style:style,
+  height:Ti.UI.SIZE,
+  width:Ti.UI.SIZE
+});
+$.win.add(activityIndicator);
+
 var args = arguments[0] || {};
 
 var image1, image2, image2, image4;
@@ -17,9 +30,12 @@ if(isEmpty(args)){
     		&& $.answ1.getValue() == ''
     		&& $.answ2.getValue() == ''
     		&& $.answ3.getValue() == ''
-    		&& $.answ4.getValue() == ''){
+    		&& $.answ4.getValue() == ''
+    		&& $.question.getValue() == ''
+    		&& correcta.getValue() == ''){
     		alert("Uno o mas campos vacíos.");		
     	}else{
+    		
     		var url = "http://sheltered-mesa-1621.herokuapp.com/api/users/me/questions";
 		    var del = Ti.Network.createHTTPClient({
 		        onload: function(e) {
@@ -35,6 +51,7 @@ if(isEmpty(args)){
 		    del.open('POST', url);
 		    del.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
 		    del.setRequestHeader('token', Ti.App.Properties.getString("token"));
+		    activityIndicator.show();
 		    del.send({
 		    	question: $.question.getValue()
 		    });
@@ -275,7 +292,7 @@ function postAnswers(id, isCorrect){
 	var params4 = "type="+picker.getSelectedRow(0).title+"&answer=" + $.answ4.getValue() + "&isCorrect=" + theOne;
 	var a4 = Ti.Network.createHTTPClient({
         onload: function(e) {
-        	alert("Trivia Creada");
+        	activityIndicator.hide();
         	$.win.close();
         },
         onerror: function(e) {
@@ -288,6 +305,41 @@ function postAnswers(id, isCorrect){
     a4.send(params4);
 }
 
+function load1(){
+	Ti.Media.openPhotoGallery({
+		success: function(event){
+			image1 = event.media;
+			$.answ1.setValue(image1.nativePath);
+		}
+	});
+}
+
+function load2(){
+	Ti.Media.openPhotoGallery({
+		success: function(event){
+			image2 = event.media;
+			$.answ2.setValue(image2.nativePath);
+		}
+	});
+}
+
+function load3(){
+	Ti.Media.openPhotoGallery({
+		success: function(event){
+			image3 = event.media;
+			$.answ3.setValue(image3.nativePath);
+		}
+	});
+}
+
+function load4(){
+	Ti.Media.openPhotoGallery({
+		success: function(event){
+			image4 = event.media;
+			$.answ4.setValue(image4.nativePath);
+		}
+	});
+}
 /*
 function updateTrivia(){ 
 	var url = "http://sheltered-mesa-1621.herokuapp.com/api/users/me/questions/";
