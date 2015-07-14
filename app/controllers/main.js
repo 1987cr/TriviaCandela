@@ -29,8 +29,6 @@ function sortByKey(array, key){
 
 function loadUsers(e) {
 
-
-
     var url1 = "http://sheltered-mesa-1621.herokuapp.com/api/users/me/scores";
     var url2 = "http://sheltered-mesa-1621.herokuapp.com/api/scores";
     var json, json2;
@@ -207,66 +205,87 @@ function optionDialog(e){
 }
 
 
-function sincronizar(e){
-$.sinc.add(activityIndicator);
+function sincronizar(e) {
+
     var url = "http://sheltered-mesa-1621.herokuapp.com/api/questions";
     var json;
+    var answers;
     var xhr = Ti.Network.createHTTPClient({
         onload: function(e) {
-            json=JSON.parse(this.responseText);
-            for(var i=0;i<json.length-1;i++){
-              var questionModel = Alloy.createModel("question", {
-                id_question:json[i].id,
-            user:json[i].user.email,
-            question:json[i].question
-        });
-        // Save the model
-                    var url2="http://sheltered-mesa-1621.herokuapp.com/api/questions/"+json[i].id+"/answers";
-            var answers;
-            var ans=Ti.Network.createHTTPClient({
-                onload:function(e){
-                    answers=JSON.parse(this.responseText);
-                 for(var j=0;j<answers.length;j++){
-                    var answerModel=Alloy.createModel('answers',{
-                        id_answer:answers[j].id,
-                        question:answers[j].question,
-                        type:answers[j].type,
-                        textAnswer:answers[j].textAnswer,
-                        isCorrect:answers[j].isCorrect
-                    });
-                    answerModel.save();
-                    Alloy.Collections.answers.fetch();
+            json = JSON.parse(this.responseText);
+            for (var i = 0; i < json.length - 1; i++) {
+                var questionModel = Alloy.createModel("question", {
+                    id_question: json[i].id,
+                    user: json[i].user.email,
+                    question: json[i].question
+                });
+                questionModel.save();
+                Alloy.Collections.question.fetch();
+
+                for (var i = 0; i < json.length; i++) {
+
+                    var inline_function = function(i) {
+
+                        var url2 = "http://sheltered-mesa-1621.herokuapp.com/api/questions/" + json[i].id + "/answers";
+
+                        var ans = Ti.Network.createHTTPClient({
+                            onload: function(e) {
+                                answers = JSON.parse(this.responseText);
+                                alert('que ladilla!' + json[i].id + 'resp' + answers[0].id);
+                                for (var j = 0; j < answers.length; j++) {
+
+                                    var answerModel = Alloy.createModel('answers', {
+                                        id_answer: answers[j].id,
+                                        question: answers[j].question,
+                                        type: answers[j].type,
+                                        textAnswer: answers[j].textAnswer,
+                                        isCorrect: answers[j].isCorrect
+                                    });
+                                    answerModel.save();
+
+                                }
+                                Alloy.Collections.answers.fetch();
+
+
+                            },
+                            onerror: function(e) {
+                                alert(e);
+                            }
+                        });
+                        ans.open('GET', url2);
+                        ans.send();
+
+                    };
+                    inline_function(i);
                 }
-                
-                
-                
-                },
-                onerror:function(e){
-                    alert(e);
-                }
-            });
-            ans.open('GET',url2);
-            ans.send();
- 
-        // Resets the model's state from the database
-        questionModel.save();
-        Alloy.Collections.question.fetch();
             }
-        
-        
-        activityIndicator.hide();    
-alert('Carga Exitosa! Ya puedes jugar offline.');
+
+            activityIndicator.hide();
+            alert('Carga Exitosa! Ya puedes jugar offline.');
         },
-        onerror:function(e){
+        onerror: function(e) {
             alert(e);
         }
-        });
-    xhr.open('GET',url);
+    });
+    xhr.open('GET', url);
     activityIndicator.show();
     xhr.send();
 
 
+    // Save the model
+
+    var recoverDatabase = Alloy.createCollection("question");
+    recoverDatabase.fetch({
+        query: "SELECT * FROM question"
+    });
+
+    var recoverDatabase2 = Alloy.createCollection("answers");
+    recoverDatabase2.fetch({
+        query: "SELECT * FROM answers"
+    });
+
 }
+
 
 function cleanup() {
     $.destroy();

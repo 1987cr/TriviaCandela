@@ -41,8 +41,13 @@ if(isEmpty(args)){
 		        onload: function(e) {
 		        	var json = JSON.parse(this.responseText);
 		        	var isCorrect = correcta.getValue();
-	
-		        	postAnswers(json.id, isCorrect);
+	                if(picker.getSelectedRow(0).title == "text"){
+	                	postAnswers(json.id, isCorrect);
+	                }
+		        	
+		        	if(picker.getSelectedRow(0).title == "img"){
+		        		postAnswers2(json.id, isCorrect);
+		        	}
 		        },
 		        onerror: function(e) {
 		            alert(e);
@@ -305,6 +310,108 @@ function postAnswers(id, isCorrect){
     a4.send(params4);
 }
 
+function postAnswers2(id, isCorrect){
+	var url = "http://sheltered-mesa-1621.herokuapp.com/api/users/me/questions/";
+	url = url.concat(id);
+	url = url.concat("/answers");
+	var theOne;
+	
+
+	if(isCorrect === "1"){
+		theOne = true;
+	}else{
+		theOne = false;
+	}
+	
+	var params1 = "type="+picker.getSelectedRow(0).title+"&isCorrect=" + theOne;
+	var a1 = Ti.Network.createHTTPClient({
+        onload: function(e) {
+        	var json = JSON.parse(this.responseText);
+		    var ansId = json.id;
+		    var qId = json.question;
+		    uploadImg1(ansId, qId);
+        },
+        onerror: function(e) {
+            alert(e);
+        }
+    });
+    a1.open('POST', url);
+    a1.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+    a1.setRequestHeader('token', Ti.App.Properties.getString("token"));
+    a1.send(params1);
+	
+	if(isCorrect === "2"){
+		theOne = true;
+	}else{
+		theOne = false;
+	}
+	
+	var params2 = "type="+picker.getSelectedRow(0).title+"&isCorrect=" + theOne;
+	var a2 = Ti.Network.createHTTPClient({
+        onload: function(e) {
+        	var json = JSON.parse(this.responseText);
+		    var ansId = json.id;
+		    var qId = json.question;
+		    uploadImg2(ansId, qId);
+        },
+        onerror: function(e) {
+            alert(e);
+        }
+    });
+    a2.open('POST', url);
+    a2.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+    a2.setRequestHeader('token', Ti.App.Properties.getString("token"));
+    a2.send(params2);
+	
+	
+	if(isCorrect === "3"){
+		theOne = true;
+	}else{
+		theOne = false;
+	}
+	
+	var params3 = "type="+picker.getSelectedRow(0).title+"&isCorrect=" + theOne;
+	var a3 = Ti.Network.createHTTPClient({
+        onload: function(e) {
+        	var json = JSON.parse(this.responseText);
+		    var ansId = json.id;
+		    var qId = json.question;
+		    uploadImg3(ansId, qId);
+        },
+        onerror: function(e) {
+            alert(e);
+        }
+    });
+    a3.open('POST', url);
+    a3.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+    a3.setRequestHeader('token', Ti.App.Properties.getString("token"));
+    a3.send(params3);
+    
+    if(isCorrect === "4"){
+		theOne = true;
+	}else{
+		theOne = false;
+	}
+	
+	var params4 = "type="+picker.getSelectedRow(0).title+"&isCorrect=" + theOne;
+	var a4 = Ti.Network.createHTTPClient({
+        onload: function(e) {
+        	var json = JSON.parse(this.responseText);
+		    var ansId = json.id;
+		    var qId = json.question;
+		    uploadImg4(ansId, qId);
+        },
+        onerror: function(e) {
+            alert(e);
+        }
+    });
+    a4.open('POST', url);
+    a4.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+    a4.setRequestHeader('token', Ti.App.Properties.getString("token"));
+    a4.send(params4);
+}
+
+
 function load1(){
 	Ti.Media.openPhotoGallery({
 		success: function(event){
@@ -338,6 +445,100 @@ function load4(){
 			image4 = event.media;
 			$.answ4.setValue(image4.nativePath);
 		}
+	});
+}
+
+function uploadImg1(ansId, qId){
+	var url = "http://sheltered-mesa-1621.herokuapp.com/api/users/me/questions/";
+	url = url.concat(qId);
+	url = url.concat("/answers/");
+	url = url.concat(ansId);
+	url = url.concat("/file");
+	
+	var a1 = Ti.Network.createHTTPClient({
+        onload: function(e) {
+        	
+        },
+        onerror: function(e) {
+            alert(e);
+        }
+    });
+    a1.open('POST', url);
+    //a1.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+    a1.setRequestHeader('token', Ti.App.Properties.getString("token"));
+    a1.send({
+    	file: image1
+	});
+}
+
+function uploadImg2(ansId, qId){
+	var url = "http://sheltered-mesa-1621.herokuapp.com/api/users/me/questions/";
+	url = url.concat(qId);
+	url = url.concat("/answers/");
+	url = url.concat(ansId);
+	url = url.concat("/file");
+	
+	var a1 = Ti.Network.createHTTPClient({
+        onload: function(e) {
+        	
+        },
+        onerror: function(e) {
+            alert(e);
+        }
+    });
+    a1.open('POST', url);
+    //a1.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+    a1.setRequestHeader('token', Ti.App.Properties.getString("token"));
+    a1.send({
+    	file: image2
+	});
+}
+
+function uploadImg3(ansId, qId){
+	var url = "http://sheltered-mesa-1621.herokuapp.com/api/users/me/questions/";
+	url = url.concat(qId);
+	url = url.concat("/answers/");
+	url = url.concat(ansId);
+	url = url.concat("/file");
+	
+	var a1 = Ti.Network.createHTTPClient({
+        onload: function(e) {
+        	
+        },
+        onerror: function(e) {
+            alert(e);
+        }
+    });
+    a1.open('POST', url);
+    //a1.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+    a1.setRequestHeader('token', Ti.App.Properties.getString("token"));
+    a1.send({
+    	file: image3
+	});
+}
+
+function uploadImg4(ansId, qId){
+	var url = "http://sheltered-mesa-1621.herokuapp.com/api/users/me/questions/";
+	url = url.concat(qId);
+	url = url.concat("/answers/");
+	url = url.concat(ansId);
+	url = url.concat("/file");
+	
+	var a1 = Ti.Network.createHTTPClient({
+        onload: function(e) {
+        	activityIndicator.hide();
+        	$.win.close();
+        	alert("Trivia Creada.");
+        },
+        onerror: function(e) {
+            alert(e);
+        }
+    });
+    a1.open('POST', url);
+    //a1.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+    a1.setRequestHeader('token', Ti.App.Properties.getString("token"));
+    a1.send({
+    	file: image4
 	});
 }
 /*
