@@ -1,5 +1,7 @@
 var args = arguments[0] || {};
 
+var image1, image2, image2, image4;
+
 if(isEmpty(args)){
 	var guardar = Ti.UI.createButton({
         title: "Guardar",
@@ -11,31 +13,47 @@ if(isEmpty(args)){
     });
     
     guardar.addEventListener("click", function(){
-    	var url = "http://sheltered-mesa-1621.herokuapp.com/api/users/me/questions";
-	    var del = Ti.Network.createHTTPClient({
-	        onload: function(e) {
-	        	var json = JSON.parse(this.responseText);
-	        	var isCorrect = correcta.getValue();
-	        	postAnswers(json.id, isCorrect);
-	        },
-	        onerror: function(e) {
-	            alert(e);
-	        }
-	    });
-	    del.open('POST', url);
-	    del.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
-	    del.setRequestHeader('token', Ti.App.Properties.getString("token"));
-	    del.send({
-	    	question: $.question.getValue()
-	    });
+    	if(picker.getSelectedRow(0).title == "text"
+    		&& $.answ1.getValue() == ''
+    		&& $.answ2.getValue() == ''
+    		&& $.answ3.getValue() == ''
+    		&& $.answ4.getValue() == ''){
+    		alert("Uno o mas campos vacíos.");		
+    	}else{
+    		var url = "http://sheltered-mesa-1621.herokuapp.com/api/users/me/questions";
+		    var del = Ti.Network.createHTTPClient({
+		        onload: function(e) {
+		        	var json = JSON.parse(this.responseText);
+		        	var isCorrect = correcta.getValue();
+	
+		        	postAnswers(json.id, isCorrect);
+		        },
+		        onerror: function(e) {
+		            alert(e);
+		        } 
+		    });
+		    del.open('POST', url);
+		    del.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+		    del.setRequestHeader('token', Ti.App.Properties.getString("token"));
+		    del.send({
+		    	question: $.question.getValue()
+		    });
+    	}
     });
     
     $.buttonView.add(guardar);
     
+    var lastRowView = Ti.UI.createView({
+    	layout: 'horizontal',
+    	width: '100%',
+    	height: '10%',
+    	top: '3%'
+    });
+    
 	var correcta = Ti.UI.createTextField({
 		hintText: "Correcta (1-4)",
-		width: "75%", 
-		height: "10%",
+		width: "40%", 
+		height: "100%",
 		backgroundColor: "#fff",
 		color: "#555",
 		keyboardType: Ti.UI.KEYBOARD_DEFAULT,
@@ -46,22 +64,89 @@ if(isEmpty(args)){
 		paddingLeft: 20,
 		paddingRight: 20,
 		hintTextColor: "#aaa",
-		top: "3%"
+		top: "3%",
+		left: "5%"
 	});
     
-    $.answ1.setTop("3%");
-    $.answ2.setTop("3%");
-    $.answ3.setTop("3%");
-    $.answ4.setTop("3%");
+    var picker = Ti.UI.createPicker({
+    	left: "10%",
+    	height: "100%",
+    	width: "40%",
+    	backgroundColor: "#aaa",
+		color: "#555",
+		borderRadius: "20px",
+		borderWidth: "2px",
+		borderColor: "#aaa"
+    });
     
-    $.fieldsView.add(correcta);
+    var dataPicker = [];
+    
+    dataPicker[0] = Ti.UI.createPickerRow({title: 'text'});
+    dataPicker[1] = Ti.UI.createPickerRow({title: 'img'});
+    dataPicker[2] = Ti.UI.createPickerRow({title: 'audio'});
+    
+    picker.add(dataPicker);
+    picker.selectionIndicator = true;
+    
+    picker.addEventListener("change", function(){
+    	if(picker.getSelectedRow(0).title == "img"){
+    		$.btn1.setEnabled(true);
+    		$.btn1.setVisible(true);
+    		$.btn2.setEnabled(true);
+    		$.btn2.setVisible(true);
+    		$.btn3.setEnabled(true);
+    		$.btn3.setVisible(true);
+    		$.btn4.setEnabled(true);
+    		$.btn4.setVisible(true);
+    		
+    		$.answ1.setValue("");
+    		$.answ1.setEditable(false);
+    		
+    		$.answ2.setValue("");
+    		$.answ2.setEditable(false);
+    		
+    		$.answ3.setValue("");
+    		$.answ3.setEditable(false);
+    		
+    		$.answ4.setValue("");
+    		$.answ4.setEditable(false);
+		}else{
+			$.btn1.setEnabled(false);
+    		$.btn1.setVisible(false);
+    		$.btn2.setEnabled(false);
+    		$.btn2.setVisible(false);
+    		$.btn3.setEnabled(false);
+    		$.btn3.setVisible(false);
+    		$.btn4.setEnabled(false);
+    		$.btn4.setVisible(false);
+    		
+    		$.answ1.setEditable(true);
+    		$.answ2.setEditable(true);
+    		$.answ3.setEditable(true);
+    		$.answ4.setEditable(true);
+		}
+    	
+    });
+    
+    $.fld1.setTop("3%");
+    $.fld2.setTop("3%");
+    $.fld3.setTop("3%");
+    $.fld4.setTop("3%");
+    
+    
+    lastRowView.add(correcta);
+    lastRowView.add(picker);
+    
+    $.fieldsView.add(lastRowView);
     
 }else{
 	$.question.value = args.json.question;
-	$.answ1.value = args.json.answers[0].textAnswer;
-	$.answ2.value = args.json.answers[1].textAnswer;
-	$.answ3.value = args.json.answers[2].textAnswer;
-	$.answ4.value = args.json.answers[3].textAnswer;
+	
+	$.answ1.setVisible(false);
+	$.answ2.setVisible(false);
+	$.answ3.setVisible(false);
+	$.answ4.setVisible(false);
+	
 	var actualizar = Ti.UI.createButton({
         title: "Actualizar",
         width: "50%",
@@ -128,7 +213,7 @@ function postAnswers(id, isCorrect){
 		theOne = false;
 	}
 	
-	var params1 = "type=text&answer=" + $.answ1.getValue() + "&isCorrect=" + theOne;
+	var params1 = "type="+picker.getSelectedRow(0).title+"&answer=" + $.answ1.getValue() + "&isCorrect=" + theOne;
 	var a1 = Ti.Network.createHTTPClient({
         onload: function(e) {
         	
@@ -148,7 +233,7 @@ function postAnswers(id, isCorrect){
 		theOne = false;
 	}
 	
-	var params2 = "type=text&answer=" + $.answ2.getValue() + "&isCorrect=" + theOne;
+	var params2 = "type="+picker.getSelectedRow(0).title+"&answer=" + $.answ2.getValue() + "&isCorrect=" + theOne;
 	var a2 = Ti.Network.createHTTPClient({
         onload: function(e) {
         },
@@ -168,7 +253,7 @@ function postAnswers(id, isCorrect){
 		theOne = false;
 	}
 	
-	var params3 = "type=text&answer=" + $.answ3.getValue() + "&isCorrect=" + theOne;
+	var params3 = "type="+picker.getSelectedRow(0).title+"&answer=" + $.answ3.getValue() + "&isCorrect=" + theOne;
 	var a3 = Ti.Network.createHTTPClient({
         onload: function(e) {
         },
@@ -187,7 +272,7 @@ function postAnswers(id, isCorrect){
 		theOne = false;
 	}
 	
-	var params4 = "type=text&answer=" + $.answ4.getValue() + "&isCorrect=" + theOne;
+	var params4 = "type="+picker.getSelectedRow(0).title+"&answer=" + $.answ4.getValue() + "&isCorrect=" + theOne;
 	var a4 = Ti.Network.createHTTPClient({
         onload: function(e) {
         	alert("Trivia Creada");

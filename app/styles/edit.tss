@@ -18,12 +18,31 @@
 	layout: 'horizontal'
 }
 
-".answer": {
-	width: "75%", 
-	top: "5%",
+".answField":{
+	width: "90%",
 	height: "10%",
+	top: "5%",
+	layout: "horizontal"
+}
+
+".fileBtn":{
+	width: "34%",
+	left: "5%",
+	height: "100%",
+	backgroundColor: "#333",
+	color: "white",
+	borderRadius: "20px",
+	backgroundColor: "#ffae00",
+	visible: false,
+	enabled: false
+}
+
+".answer": {
+	width: "60%", 
+	height: "100%",
 	backgroundColor: "#fff",
 	color: "#555",
+	left: "0%",
 	keyboardType: Ti.UI.KEYBOARD_DEFAULT,
 	borderRadius: "20px",
 	borderWidth: "2px",
@@ -35,7 +54,7 @@
 }
 
 "#question": {
-	width: "75%", 
+	width: "90%", 
 	top: "5%",
 	height: "20%",
 	backgroundColor: "#fff",
