@@ -50,7 +50,7 @@ function loadTrivias(e){
 	       		var label1 = Ti.UI.createLabel({
 	                left: "25",
 	                color: "#fff",
-	                text: item + 1,
+	                text: (parseInt(item) + 1).toString(),
 	                height: "45",
 	                font: {
 	                	fontWeight: "bold"

@@ -528,7 +528,7 @@ function uploadImg4(ansId, qId){
         onload: function(e) {
         	activityIndicator.hide();
         	$.win.close();
-        	alert("Trivia Creada.");
+        	alert("Trivia Creada.");cr
         },
         onerror: function(e) {
             alert(e);

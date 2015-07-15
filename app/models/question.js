@@ -1,8 +1,8 @@
 exports.definition = {
 	config: {
 		columns: {
-		    "question": "string",
-		    "user": "string",
+		    "question": "text",
+		    "user": "text",
 		    "id_question": "integer PRIMARY KEY AUTOINCREMENT"
 		},
 		adapter: {

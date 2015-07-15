@@ -5,10 +5,9 @@
 		<Tab id="tab1">
 			<Window title="Tab 1">
 				<View id="view_splash">
-					<ImageView id="img_splash">
-						
-					</ImageView>
+
 				</View>
+				
 				<View id="view_play">
 					<Button onClick="playTrivia">Nuevo Juego</Button> 
 				</View>
@@ -20,10 +19,14 @@
 		<!-- Ponte Candela Tab -->
 		<Tab id="tab2">
 			<Window title="Tab 2" onClose="cleanup"> 
-				<View layout="vertical">
+				<View id="ponte_splash">
+
+				</View>
+				
+				<View id="view_ponte" layout="vertical">
 					<Button onClick="sincronizar">Sincronizar</Button>
 					
-					<Button onClick="manage">Administrar Trivias</Button> 
+					<Button onClick="manage">Administrar Trivias</Button>
 				</View>
 				
 			</Window>

@@ -2,9 +2,9 @@ exports.definition = {
 	config: {
 		columns: {
 		    "question": "integer",
-		    "type": "string",
-		    "textAnswer": "string",
-		    "isCorrect": "boolean",
+		    "type": "text",
+		    "textAnswer": "text",
+		    "isCorrect": "BOOLEAN",
 		    "id_answer": "integer PRIMARY KEY"
 		},
 		adapter: {

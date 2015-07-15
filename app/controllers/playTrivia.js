@@ -1,10 +1,10 @@
 var puntaje = 0;
 var cant = 0;
-var j = 13;
+var j = 0;
 var answerglob;
 var jsonglob;
 var style;
-
+var user_question;
 
 
 if (Ti.Platform.name === 'iPhone OS') {
@@ -39,12 +39,12 @@ sound.audioSessionMode = Ti.Media.AUDIO_SESSION_MODE_PLAYBACK;
 })();
 
 function loadQuestionsOff(e) {
-
     var recoverQuestion = Alloy.createCollection("question");
     recoverQuestion.fetch({
         query: "SELECT * FROM question"
     });
-
+	
+	alert(recoverQuestion.length);
     var label = Ti.UI.createLabel({
         top: "25%",
         textAlign: Ti.UI.TEXT_ALIGNMENT_CENTER,
@@ -63,6 +63,25 @@ function loadQuestionsOff(e) {
     recoverAnswers.fetch({
         query: "SELECT * FROM answers WHERE question=" + recoverQuestion.at(j).get('id_question')
     });
+
+    var answer1 = false;
+    var answer2 = false;
+    var answer3 = false;
+    var answer4 = false;
+
+    if (recoverAnswers.at(0).get('isCorrect') == 'true') {
+        answer1 = true;
+    }
+    if (recoverAnswers.at(1).get('isCorrect') == 'true') {
+        answer2 = true;
+    }
+    if (recoverAnswers.at(2).get('isCorrect') == 'true') {
+        answer3 = true;
+    }
+    if (recoverAnswers.at(3).get('isCorrect') == 'true') {
+        answer4 = true;
+    }
+
 
 
     if (recoverAnswers.at(0).get('type') == "img" || recoverAnswers.at(0).get('type') == "audio") {
@@ -118,7 +137,8 @@ function loadQuestionsOff(e) {
 
         res1.addEventListener("click", function() {
 
-            if (recoverAnswers.at(0).get("isCorrect") == true) {
+            if (answer1) {
+
                 res1.setBackgroundColor('green');
                 puntaje = puntaje + 10;
 
@@ -127,16 +147,16 @@ function loadQuestionsOff(e) {
             } else {
                 res1.setBackgroundColor('red');
 
-                if (recoverAnswers.at(1).get("isCorrect") == true) {
+                if (answer2) {
                     res2.setBackgroundColor('green');
                 }
-                if (recoverAnswers.at(2).get("isCorrect") == true) {
+                if (answer3) {
                     res3.setBackgroundColor('green');
                 }
-                if (recoverAnswers.at(3).get("isCorrect") == true) {
+                if (answer4) {
                     res4.setBackgroundColor('green');
                 }
-                sumarScoreUser();
+                sumarScoreUserOff();
                 mostrarBotonContinue();
 
 
@@ -145,7 +165,7 @@ function loadQuestionsOff(e) {
         });
         res2.addEventListener("click", function() {
 
-            if (recoverAnswers.at(1).get("isCorrect") == true) {
+            if (answer2) {
                 res2.setBackgroundColor('green');
                 puntaje = puntaje + 10;
 
@@ -153,23 +173,23 @@ function loadQuestionsOff(e) {
             } else {
                 res2.setBackgroundColor('red');
 
-                if (recoverAnswers.at(0).get("isCorrect") == true) {
+                if (answer1) {
                     res1.setBackgroundColor('green');
                 }
-                if (recoverAnswers.at(2).get("isCorrect") == true) {
+                if (answer3) {
                     res3.setBackgroundColor('green');
                 }
-                if (recoverAnswers.at(3).get("isCorrect") == true) {
+                if (answer4) {
                     res4.setBackgroundColor('green');
                 }
-                sumarScoreUser();
+                sumarScoreUserOff();
                 mostrarBotonContinue();
 
             }
         });
         res3.addEventListener("click", function() {
 
-            if (recoverAnswers.at(2).get("isCorrect") == true) {
+            if (answer3) {
                 res3.setBackgroundColor('green');
                 puntaje = puntaje + 10;
 
@@ -179,22 +199,22 @@ function loadQuestionsOff(e) {
             } else {
                 res3.setBackgroundColor('red');
 
-                if (recoverAnswers.at(0).get("isCorrect") == true) {
+                if (answer1) {
                     res1.setBackgroundColor('green');
                 }
-                if (recoverAnswers.at(1).get("isCorrect") == true) {
+                if (answer2) {
                     res2.setBackgroundColor('green');
                 }
-                if (recoverAnswers.at(3).get("isCorrect") == true) {
+                if (answer4) {
                     res4.setBackgroundColor('green');
                 }
-                sumarScoreUser();
+                sumarScoreUserOff();
                 mostrarBotonContinue();
             }
         });
         res4.addEventListener("click", function() {
 
-            if (recoverAnswers.at(3).get("isCorrect") == true) {
+            if (answer4) {
                 res4.setBackgroundColor('green');
                 puntaje = puntaje + 10;
                 actualizar2();
@@ -202,16 +222,16 @@ function loadQuestionsOff(e) {
                 res4.setBackgroundColor('red');
 
 
-                if (recoverAnswers.at(0).get("isCorrect") == true) {
+                if (answer1) {
                     res1.setBackgroundColor('green');
                 }
-                if (recoverAnswers.at(1).get("isCorrect") == true) {
+                if (answer2) {
                     res2.setBackgroundColor('green');
                 }
-                if (recoverAnswers.at(2).get("isCorrect") == true) {
+                if (answer3) {
                     res3.setBackgroundColor('green');
                 }
-                sumarScoreUser();
+                sumarScoreUserOff();
                 mostrarBotonContinue();
 
             }
@@ -315,7 +335,6 @@ function loadQuestionsOff(e) {
 
     j = j + 1;
 }
-
 
 function loadQuestions(e) {
 
@@ -687,7 +706,6 @@ function loadQuestions(e) {
 }
 
 
-
 function loadQuestionsinSound(e) {
 
     var scrollView = Ti.UI.createScrollView({
@@ -782,6 +800,12 @@ function loadQuestionsinSound(e) {
     view2.add(playicon2);
     view2.add(res2);
 
+
+
+
+
+
+
     var playicon3 = Ti.UI.createImageView({
         image: '/play_icon.png',
         top: '20%',
@@ -801,6 +825,12 @@ function loadQuestionsinSound(e) {
 
     view3.add(playicon3);
     view3.add(res3);
+
+
+
+
+
+
 
     var playicon4 = Ti.UI.createImageView({
         image: '/play_icon.png',
@@ -1035,18 +1065,20 @@ function loadQuestionsinSound(e) {
 
     };
 
+
     ///////////////////////////////////////////////////////////////////////////
+
 }
 
 
-function giveUp(e){
+function giveUp(e) {
     $.giveUp.setBackgroundColor("#ff6000");
     $.rendirseDialog.show();
 }
 
-function rendirseDialog(e){
-    if(e.index == 0){
-        var w=Alloy.createController('main').getView();  
+function rendirseDialog(e) {
+    if (e.index == 0) {
+        var w = Alloy.createController('main').getView();
         w.open();
     }
 }
@@ -1074,4 +1106,11 @@ function sumarScoreUser(e) {
 
 }
 
-
+function sumarScoreUserOff(e) {
+    var scoreModel = Alloy.createModel("scores", {
+        id: 9999,
+        score: puntaje
+    });
+    scoreModel.save();
+    alert('puntaje es: ' + scoreModel.get('score'));
+}

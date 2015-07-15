@@ -49,7 +49,20 @@
 	backgroundImage: "/home-splash.png"
 }
 
+"#ponte_splash":{
+	width: "100%",
+	height: "45%",
+	top: "0%",
+	backgroundImage: "/ponte-splash.png"
+}
+
 "#view_play":{
+	width: "100%",
+	height: "55%",
+	top: "45%"
+}
+
+"#view_ponte":{
 	width: "100%",
 	height: "55%",
 	top: "45%"
