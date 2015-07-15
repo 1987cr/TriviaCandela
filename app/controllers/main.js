@@ -26,9 +26,87 @@ function sortByKey(array, key) {
     });
 }
 
+function podio(){
+	if(Ti.Network.networkTypeName != 'WIFI'){
+		loadUsersOff();
+	}else{
+		loadUsers();
+	}
+}
+
+function loadUsersOff(e) {
+    var tableData = [];
+    var recoverScores = Alloy.createCollection("scores");
+    recoverScores.fetch({
+        query: "SELECT * FROM scores ORDER BY score DESC"
+    });
+    for (var i = 0; i < recoverScores.length; i++) {
+
+        var row = Ti.UI.createTableViewRow({
+
+        });
+
+        var view = Ti.UI.createView({
+            borderColor: "#ff6000",
+            height: "100",
+            borderRadius: 5,
+            borderWidth: 1,
+            left: "5",
+            right: "5",
+            top: "10",
+            bottom: "5",
+            height: Ti.UI.SIZE,
+            width: Ti.UI.FILL,
+            backgroundColor: "#ff6000"
+        });
+
+
+        var label1 = Ti.UI.createLabel({
+            left: "25",
+            color: "#fff",
+            text: i + 1,
+            height: "45",
+            font: {
+                fontSize: 30
+            }
+        });
+
+        var label2 = Ti.UI.createLabel({
+            left: "80",
+            color: "#fff",
+            text: 'Soy yo!',
+            height: "45",
+            font: {
+                fontWeight: "bold"
+            }
+        });
+
+        var label3 = Ti.UI.createLabel({
+            right: "30",
+            color: "#fff",
+            text: recoverScores.at(i).get('score'),
+            height: "45",
+            font: {
+                fontSize: 20,
+                fontWeight: "bold"
+            }
+        });
+        //view.add(image);
+        view.add(label1);
+        view.add(label2);
+        view.add(label3);
+
+        row.add(view);
+
+        tableData.push(row);
+
+
+    }
+    $.mainList.setData(tableData);
+
+}
+
 function loadUsers(e) {
-
-
 
     var url1 = "http://sheltered-mesa-1621.herokuapp.com/api/users/me/scores";
     var url2 = "http://sheltered-mesa-1621.herokuapp.com/api/scores";
@@ -103,9 +181,9 @@ function loadUsers(e) {
 
         },
         onerror: function(e) {
-            alert(e);
+            alert("No se pudo alcanzar el servidor.");
         },
-        timeout: 8000
+        timeout: 20000
     });
 
     personal.open("GET", url1);
@@ -185,9 +263,8 @@ function loadUsers(e) {
 
         },
         onerror: function(e) {
-            alert(e);
         },
-        timeout: 8000
+        timeout: 20000
     });
     xhr.open("GET", url2);
     xhr.send();

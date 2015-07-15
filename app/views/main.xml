@@ -33,7 +33,7 @@
 		</Tab>
 				
 		<!-- Podio Tab -->
-		<Tab id="tab3" onClick="loadUsers">
+		<Tab id="tab3" onClick="podio">
 			<Window title="Tab 2" id="wintrophy">
 				<View  id="podio_splash">
 					

@@ -44,7 +44,6 @@ function loadQuestionsOff(e) {
         query: "SELECT * FROM question"
     });
 	
-	alert(recoverQuestion.length);
     var label = Ti.UI.createLabel({
         top: "25%",
         textAlign: Ti.UI.TEXT_ALIGNMENT_CENTER,
@@ -331,7 +330,6 @@ function loadQuestionsOff(e) {
         }
 
     }
-
 
     j = j + 1;
 }
@@ -675,9 +673,9 @@ function loadQuestions(e) {
                         }
                     },
                     onerror: function(e) {
-                        alert(e);
+                        
                     },
-                    timeout: 5000
+                    timeout: 15000
 
                 });
 
@@ -687,16 +685,9 @@ function loadQuestions(e) {
 
             },
             onerror: function(e) {
-                //Aqui cargamos las cosas de la base de datos local...
-                alert(e);
-
-
-
-
-                //////////////////////AQUI TERMINA LO OFFLINE
-
+                
             },
-            timeout: 5000
+            timeout: 15000
         });
         xhr.open("GET", url);
         activityIndicator.show();
@@ -759,7 +750,7 @@ function loadQuestionsinSound(e) {
 
     //////////////////////////////////////////////VISTA1
     var playicon = Ti.UI.createImageView({
-        image: '/play_icon.png',
+        image: '/play.png',
         top: '20%',
         width: 60,
         height: 60
@@ -781,7 +772,7 @@ function loadQuestionsinSound(e) {
 
 
     var playicon2 = Ti.UI.createImageView({
-        image: '/play_icon.png',
+        image: '/play.png',
         top: '20%',
         width: 60,
         height: 60
@@ -807,7 +798,7 @@ function loadQuestionsinSound(e) {
 
 
     var playicon3 = Ti.UI.createImageView({
-        image: '/play_icon.png',
+        image: '/play.png',
         top: '20%',
         width: 60,
         height: 60
@@ -826,14 +817,8 @@ function loadQuestionsinSound(e) {
     view3.add(playicon3);
     view3.add(res3);
 
-
-
-
-
-
-
     var playicon4 = Ti.UI.createImageView({
-        image: '/play_icon.png',
+        image: '/play.png',
         top: '20%',
         width: 60,
         height: 60
@@ -1093,9 +1078,9 @@ function sumarScoreUser(e) {
 
         },
         onerror: function(e) {
-            alert(e);
+            
         },
-        timeout: 5000
+        timeout: 15000
     });
     score.open('POST', url);
     score.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
@@ -1108,9 +1093,8 @@ function sumarScoreUser(e) {
 
 function sumarScoreUserOff(e) {
     var scoreModel = Alloy.createModel("scores", {
-        id: 9999,
         score: puntaje
     });
     scoreModel.save();
-    alert('puntaje es: ' + scoreModel.get('score'));
+    alert('Tu puntaje obtenido fue: ' + scoreModel.get('score'));
 }
