@@ -79,9 +79,10 @@ function loadTrivias(e){
 				
         },
         onerror: function(e) {
-            alert('error');
+            alert('No se pudo comunicar con el servidor.');
+            closeMe();
         },
-        timeout: 8000
+        timeout: 20000
    }); 
 
     personal.open("GET", url1);

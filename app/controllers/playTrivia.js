@@ -1074,7 +1074,7 @@ function sumarScoreUser(e) {
     var tokeni = Ti.App.Properties.getString('token');
     var score = Ti.Network.createHTTPClient({
         onload: function(e) {
-
+			alert('Tu puntaje obtenido fue: ' + puntaje);
         },
         onerror: function(e) {
             
