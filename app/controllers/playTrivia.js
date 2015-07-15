@@ -30,10 +30,9 @@ sound.audioSessionMode = Ti.Media.AUDIO_SESSION_MODE_PLAYBACK;
 
     $.question.add(activityIndicator);
     if (Titanium.Network.networkTypeName != 'WIFI') {
-
-        loadQuestions();
+		loadQuestionsOff();        
     } else {
-        loadQuestionsOff();
+        loadQuestions();
     }
 
 })();
